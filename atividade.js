@@ -1,6 +1,6 @@
 console.log('-------------- Cálculo Númerico ---------------');
 console.log('--------- Implementação do Algoritmo -----------');
-console.log('------------ f(x) = e^x - 5x -------------');
+console.log('------------ f(x) = 3x³ - 4 -------------');
 console.log('');
 
 // bissecao(1, 2, 0.001);
@@ -9,17 +9,24 @@ console.log('');
 // bissecao(2.4, 2.6, 0.0001);
 // posicaofalsa(2.4, 2.6, 0.0001);
 
-bissecao(0, 2, 0.0001);
-posicaofalsa(0, 2, 0.0001);
+// bissecao(0, 2, 0.0001);
+// posicaofalsa(0, 2, 0.0001);
 secante(f, 0, 2, 0.0001, 50);
+NewtonRaphson(f, flin, 2, 0.0001, 50);
 
 // secante(f, 0, 1, 0.0005, 50);
 
+
 function f(x) {
     // return ((x**3) + (4*(x**2)) - 10);
-    return ((2.71828182846**x) - 5*x);
-    // return (3*(x**3) - 4);
+    // return ((2.71828182846**x) - 5*x);
+    return (3*(x**3) - 4);
     // return x**3 - 9*x + 3;
+}
+
+function flin(x) {
+    return 9*x**2;
+    // return 3*x**2 - 9;
 }
 
 function bissecao(a, b, tol) {
@@ -96,7 +103,7 @@ function secante(f, x0, x1, tol, iterMax) {
         console.log('[I]:', i,'[x2]:', x2, '[f(x2)]:', f(x2));
 
         if (Math.abs(f(x2)) <= tol) {
-            return console.log('Raiz encontrada: ',x2);
+            return console.log('Raiz Aproximada: ',x2);
         } 
 
         x0 = x1;
@@ -104,6 +111,32 @@ function secante(f, x0, x1, tol, iterMax) {
     }
 
     console.log('Número máximo de iterações atingido.');
-    console.log('Raiz encontrada:', x2);
+    console.log('Raiz Aproximada:', x2);
+}
+
+function NewtonRaphson(f, flin, x0, tol, iterMax=50) {
+    console.log('------------------------ // ------------------------');
+    console.log('------------ Método de Newton-Raphson ------------');
+    console.log('------------------------ // ------------------------');
+
+    if (Math.abs(f(x0)) <= tol) {
+        return (false, x0);
+    }
+
+    console.log('[x0]:', x0  ,'[f(x0)]:', f(x0), '[flin(x)]:', flin(x0));
+
+    for (var i = 1; i <= iterMax; i++) {
+        x1 = x0 - f(x0) / flin(x0);
+        console.log('[I]:', i,'[x1]:', x1,'[f(x1]:', f(x1), '[flin(x)]:', flin(x1));
+
+        if (Math.abs(f(x1)) <= tol) {
+            return console.log('Raiz Aproximada: ',x1);
+        } 
+
+        x0 = x1;
+    }
+
+    console.log('Número máximo de iterações atingido.');
+    console.log('Raiz Aproximada:', x1);
 
 }
