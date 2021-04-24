@@ -1,6 +1,6 @@
 console.log('-------------- Cálculo Númerico ---------------');
 console.log('--------- Implementação do Algoritmo -----------');
-console.log('------------ f(x) = 3x³ - 4 -------------');
+// console.log('------------ f(x) = 3x³ - 4 -------------');
 console.log('');
 
 // bissecao(1, 2, 0.001);
@@ -9,24 +9,101 @@ console.log('');
 // bissecao(2.4, 2.6, 0.0001);
 // posicaofalsa(2.4, 2.6, 0.0001);
 
-// bissecao(0, 2, 0.0001);
-// posicaofalsa(0, 2, 0.0001);
-secante(f, 0, 2, 0.0001, 50);
-NewtonRaphson(f, flin, 2, 0.0001, 50);
-
 // secante(f, 0, 1, 0.0005, 50);
+
+bissecao(0.4, 0.5, 0.0002);
+posicaofalsa(0.4, 0.5, 0.0002);
+// pontoFixo(0.5, 50);
+NewtonRaphson(f, flin, 0.5, 0.0002, 50);
+secante(f, 0.4, 0.5, 0.0002, 50);
+
+/*
+    TERCEIRA QUESTÃO DA FICHA
+
+    bissecao(0, 1, 0.00001);
+    pontoFixo(0.5, 10);
+    posicaofalsa(0, 1, 0.00001);
+    NewtonRaphson(f, flin, 0.5, 0.00001, 50);
+    secante(f, 0, 1, 0.00001, 50);
+*/
+
+/*
+    QUARTA QUESTÃO DA FICHA
+    bissecao(1, 0, 0.001);
+*/
+
+/**
+ *  SÉTIMA QUESTÃO DA FICHA
+    NewtonRaphson(f, flin, 1, 0,0003, 50);
+ */
+
+/**
+ * OITAVA QUESTÃO DA FICHA
+ secante(f, 1, 2, 0,001, 30);
+*/
+
 
 
 function f(x) {
     // return ((x**3) + (4*(x**2)) - 10);
     // return ((2.71828182846**x) - 5*x);
-    return (3*(x**3) - 4);
+    // return (3*(x**3) - 4);
     // return x**3 - 9*x + 3;
+
+    /* 
+    TERCEIRA QUESTÃO DA FICHA
+
+    return (4*(Math.sin(x)) - (2.71828182846**x));
+    */
+
+    /**
+     *  QUARTA QUESTÃO DA FICHA
+     return x**3 - Math.sin(x);
+     */
+
+    /**
+     * SÉTIMA QUESTÃO DA FICHA
+     return 2*x - Math.log(x) - 4;
+    */
+
+    /**
+     * OITAVA QUESTÃO DA FICHA
+     return 1 - x*Math.log(x);
+    */
+
+    // return x**2 + Math.log(x);
+
+    return 2*x - Math.cos(x);
 }
 
 function flin(x) {
-    return 9*x**2;
+    // return 9*x**2;
     // return 3*x**2 - 9;
+
+    /* 
+    TERCEIRA QUESTÃO DA FICHA
+
+    return (4*(Math.cos(x)) - (2.71828182846**x));
+    */
+
+    /**
+     * SÉTIMA QUESTÃO DA FICHA
+     return 2 - 1/x;
+     */
+
+    // return 15.06 - 8.418*x**2;
+
+    return Math.sin(x) + 2;
+
+}
+
+function g(x) {
+    /* 
+    TERCEIRA QUESTÃO DA FICHA
+
+    return x - 2*Math.sin(x) + 0.5*2.71828182846**x;
+    */
+   return 2*x - Math.cos(x);
 }
 
 function bissecao(a, b, tol) {
@@ -52,9 +129,24 @@ function bissecao(a, b, tol) {
         }
         console.log('[I]: ', i++,'|| Valor da Raiz: ', c, 'f(x): ', fc);
     }
-    c=(a+b)/2;
+    // c=(a+b)/2;
     return console.log('Raiz Aproximada: ', c);
 
+}
+
+function pontoFixo(x0, iterMax) {
+    console.log('------------------------ // ------------------------');
+    console.log('------------ Método do Ponto Fixo ------------');
+    console.log('------------------------ // ------------------------');
+    iteracao = 0
+    x1 = 0
+    while (iteracao < iterMax){
+        x1 = g(x0)
+        x0 = x1
+        iteracao += 1
+        console.log('[I]: ', iteracao,'|| Valor da Raiz: ', x1, 'f(x): ', f(x1));
+    }
+    return console.log('Raiz Aproximada: ', x1);
 }
 
 function posicaofalsa(a, b, tol) {
